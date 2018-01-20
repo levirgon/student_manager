@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.tutexp.student_details.adapter.model.Student;
+import com.tutexp.student_details.model.Student;
 import com.tutexp.student_details.dao.StudentDAO;
 
 /**

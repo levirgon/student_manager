@@ -1,7 +1,9 @@
-package com.tutexp.student_details.adapter.model;
+package com.tutexp.student_details.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+
+import java.io.Serializable;
 
 /**
  * Created by noushad on 1/20/18.
@@ -9,19 +11,29 @@ import android.arch.persistence.room.PrimaryKey;
 
 
 @Entity
-public class Student {
+public class Student implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int id;
     private String name;
     private String rollNo;
     private String address;
+    private String gender;
     private int imageId;
 
-    public Student( String name, String rollNo, String address, int imageId) {
+    public Student(String name, String rollNo, String address, String gender, int imageId) {
         this.name = name;
         this.rollNo = rollNo;
         this.address = address;
+        this.gender = gender;
         this.imageId = imageId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getId() {

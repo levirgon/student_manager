@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.tutexp.student_details.activity.MainActivity;
 import com.tutexp.student_details.R;
-import com.tutexp.student_details.adapter.model.Student;
+import com.tutexp.student_details.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,22 +54,34 @@ public class StudentAdapter extends RecyclerView.Adapter {
     private class StudentVH extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameText;
         TextView rollText;
+        ImageView profileImage;
+        private Student mItem;
 
         public StudentVH(View view) {
             super(view);
             nameText = view.findViewById(R.id.item_name);
             rollText = view.findViewById(R.id.item_roll);
+            profileImage = view.findViewById(R.id.item_image);
+            view.setOnClickListener(this);
         }
 
         public void updateUI(Student item) {
+            mItem = item;
+            if (item.getGender().equals("male")){
+                profileImage.setImageResource(R.drawable.male_student);
+            }else if (item.getGender().equals("female")){
+                profileImage.setImageResource(R.drawable.female_student);
+            }else{
+                profileImage.setImageResource(R.drawable.baby);
 
+            }
             nameText.setText(item.getName());
             rollText.setText(item.getRollNo());
         }
 
         @Override
         public void onClick(View v) {
-            
+            ((MainActivity)mContext).showDetails(mItem);
         }
     }
 

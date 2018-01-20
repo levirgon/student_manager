@@ -1,4 +1,4 @@
-package com.tutexp.student_details;
+package com.tutexp.student_details.activity;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -6,6 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +16,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.tutexp.student_details.fragment.DetailFragment;
+import com.tutexp.student_details.R;
 import com.tutexp.student_details.adapter.StudentAdapter;
-import com.tutexp.student_details.adapter.model.Student;
+import com.tutexp.student_details.model.Student;
 import com.tutexp.student_details.viewmodel.StudentListViewModel;
 
 import java.util.List;
@@ -65,21 +72,42 @@ public class MainActivity extends AppCompatActivity {
         final EditText nameInput = (EditText) viewInflated.findViewById(R.id.name_input);
         final EditText rollInput = (EditText) viewInflated.findViewById(R.id.roll_input);
         final EditText addresInput = (EditText) viewInflated.findViewById(R.id.address_input);
+        final RadioButton maleRadio = viewInflated.findViewById(R.id.rb_male);
+        final RadioButton femaleRadio = viewInflated.findViewById(R.id.rb_female);
+        final RadioGroup radioGroup = viewInflated.findViewById(R.id.gender_rad_group);
+
+
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(isEmpty(nameInput)||isEmpty(rollInput)||isEmpty(addresInput)) {
-                    Toast.makeText(MainActivity.this,"No Fields Can Be Empty",Toast.LENGTH_LONG).show();
-                }else {
+                if (isEmpty(nameInput) || isEmpty(rollInput) || isEmpty(addresInput)) {
+                    Toast.makeText(MainActivity.this, "No Fields Can Be Empty", Toast.LENGTH_LONG).show();
+                } else {
 
-                    String name = nameInput.getText().toString();
-                    String roll = rollInput.getText().toString();
-                    String address = addresInput.getText().toString();
-                    Student student = new Student(name, roll, address, R.drawable.student_icon);
-                    addItem(student);
-                    dialog.dismiss();
+                    String gender = "";
+                    if (radioGroup.getCheckedRadioButtonId() == -1) {
+                        gender = "none";
+                    } else {
+                        if (maleRadio.isChecked()) {
+                            gender = "male";
+                        }
+                        if (femaleRadio.isChecked()) {
+                            gender = "female";
+                        }
+                    }
+
+                    if(!gender.equals("none")) {
+                        String name = nameInput.getText().toString();
+                        String roll = rollInput.getText().toString();
+                        String address = addresInput.getText().toString();
+                        Student student = new Student(name, roll, address, gender, 101);
+                        addItem(student);
+                        dialog.dismiss();
+                    }else{
+                        Toast.makeText(MainActivity.this, "No Fields Can Be Empty", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -102,5 +130,18 @@ public class MainActivity extends AppCompatActivity {
             return false;
 
         return true;
+    }
+
+    public void showDetails(Student item) {
+        startFragment(DetailFragment.newInstance(item), "student_details");
+    }
+
+    public void startFragment(Fragment fragment, String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment, tag).addToBackStack(null);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.commitAllowingStateLoss();
+
     }
 }

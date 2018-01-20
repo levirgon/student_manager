@@ -6,7 +6,7 @@ import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.tutexp.student_details.adapter.model.Student;
+import com.tutexp.student_details.model.Student;
 
 import java.util.List;
 

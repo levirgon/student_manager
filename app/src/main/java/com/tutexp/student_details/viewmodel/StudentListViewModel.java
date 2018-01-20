@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.tutexp.student_details.adapter.model.Student;
+import com.tutexp.student_details.model.Student;
 import com.tutexp.student_details.database.AppDB;
 
 import java.util.List;
