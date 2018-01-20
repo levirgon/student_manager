@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/poiret_one"
             android:hint="name"
             android:inputType="textCapWords" />
     </android.support.design.widget.TextInputLayout>
@@ -41,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/poiret_one"
             android:hint="roll"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
@@ -61,6 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@android:color/transparent"
+            android:fontFamily="@font/poiret_one"
             android:hint="address"
             android:inputType="textPostalAddress" />
     </android.support.design.widget.TextInputLayout>
@@ -71,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/poiret_one"
         android:text="Gender :"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
@@ -94,6 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/poiret_one"
             android:text="Male" />
 
         <RadioButton
@@ -101,6 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/poiret_one"
             android:text="Female" />
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>

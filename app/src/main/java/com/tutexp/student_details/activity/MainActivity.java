@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         final RadioButton femaleRadio = viewInflated.findViewById(R.id.rb_female);
         final RadioGroup radioGroup = viewInflated.findViewById(R.id.gender_rad_group);
 
-
         builder.setView(viewInflated);
 
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -117,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.cancel();
             }
         });
-
         builder.show();
     }
 
@@ -135,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
     public void showDetails(Student item) {
         startFragment(DetailFragment.newInstance(item), "student_details");
     }
+
+
 
     public void startFragment(Fragment fragment, String tag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
